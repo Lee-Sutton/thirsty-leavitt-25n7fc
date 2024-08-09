@@ -15,14 +15,14 @@ let profiles = [
     id: "78afca18-8162-4ed5-9a7b-212b98c9ec87",
     name: "Campaign Profile",
     parentId: null,
-    currency: "AUD"
+    currency: "CAD",
   },
   {
     id: "2ad19172-9683-407d-9732-8397d58ddcb2",
     name: "Nick's Fundraising Profile",
     parentId: "78afca18-8162-4ed5-9a7b-212b98c9ec87",
-    currency: "AUD"
-  }
+    currency: "CAD",
+  },
 ];
 
 /**
@@ -39,8 +39,8 @@ let donations = [
     donorName: "Jane Smith",
     amount: 5000,
     profileId: "2ad19172-9683-407d-9732-8397d58ddcb2",
-    currency: "AUD"
-  }
+    currency: "CAD",
+  },
 ];
 
 /**
@@ -50,11 +50,11 @@ let donations = [
 const conversionRates = {
   USD: 1,
   AUD: 0.74,
-  EUR: 1.18
+  EUR: 1.18,
 };
 
 app.get("/", (req, res) => {
-  res.send("Welcome to the Raisely API");
+  res.send("Welcome to the Keela API");
 });
 
 /**
