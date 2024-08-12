@@ -45,12 +45,12 @@ let donations = [
 
 /**
  * Conversion rates from given currencies to USD
- * The numbers indicate that 1 AUD is equal to 0.74 USD
+ * The numbers indicate that 1 CAD is equal to 0.73 USD
  */
 const conversionRates = {
   USD: 1,
-  AUD: 0.74,
-  EUR: 1.18,
+  CAD: 0.73,
+  EUR: 1.09,
 };
 
 app.get("/", (req, res) => {
