@@ -1,6 +1,14 @@
 const express = require("express");
 const app = express();
 const port = 8080;
+const uuid = require("uuid");
+
+// infra/services
+const DonationService = require("./services/donation-service");
+const ProfileService = require("./services/profile-service");
+
+const DonationRepo = require("./repo/donation-repo");
+const ProfileRepo = require("./repo/profile-repo");
 
 app.use(express.json());
 
@@ -54,6 +62,9 @@ const conversionRates = {
   EUR: 1.09,
 };
 
+const donationService = new DonationService(new DonationRepo(donations));
+const profileService = new ProfileService(new ProfileRepo(profiles));
+
 app.get("/", (req, res) => {
   res.send("Welcome to the Keela API");
 });
@@ -69,14 +80,34 @@ app.get("/profiles", (req, res) => {
  * Fetch a single profiles donations
  */
 app.get("/profiles/:profile/donations", (req, res) => {
-  // Your implementation here
+  const { profile } = req.params;
+  if (!uuid.validate(profile)) {
+    return res.status(400).json({ errors: { profile: "Invalid UUID" } });
+  }
+  if (profileService.findById(profile).length === 0) {
+    return res.status(404).json({ errors: "Profile not found" });
+  }
+  const data = donationService.findByProfileId(profile);
+  res.json({ data });
 });
 
 /**
  * Submit a new donation to the profile with the given ID
  */
 app.post("/profiles/:profile/donations", (req, res) => {
-  // Your implementation here
+  const { profile } = req.params;
+  const donation = req.body;
+
+  if (!uuid.validate(profile)) {
+    return res.status(400).json({ errors: { profile: "Invalid UUID" } });
+  }
+
+  if (profileService.findById(profile).length === 0) {
+    return res.status(404).json({ errors: "Profile not found" });
+  }
+
+  donationService.donateToProfile(profile, donation);
+  res.status(201).send();
 });
 
 module.exports = app;
