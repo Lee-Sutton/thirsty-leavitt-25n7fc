@@ -1,0 +1,20 @@
+{
+  "name": "keela-profile-and-donations-sandbox-2024",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "test": "NODE_ENV=TEST jest"
+  },
+  "dependencies": {
+    "express": "4.17.1",
+    "jest": "27.1.1",
+    "supertest": "6.1.6",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "1.18.4"
+  },
+  "keywords": []
+}
